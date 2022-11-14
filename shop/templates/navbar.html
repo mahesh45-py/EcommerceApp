@@ -1,0 +1,232 @@
+<!-- Navbar -->
+
+<style type="text/css">
+  html,
+  body,
+  header,
+  .carousel {
+    height: 60vh;
+  }
+
+  @media (max-width: 740px) {
+
+    html,
+    body,
+    header,
+    .carousel {
+      height: 100vh;
+    }
+  }
+
+  @media (min-width: 800px) and (max-width: 850px) {
+
+    html,
+    body,
+    header,
+    .carousel {
+      height: 100vh;
+    }
+  }
+</style>
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+  <div class="container">
+
+    <!-- Brand -->
+    <a class="navbar-brand waves-effect" href="/">
+      <strong class="blue-text">Ecommerce App</strong>
+    </a>
+
+    <!-- Collapse -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <!-- Left -->
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item {% if request.path == '/' %}active{% endif %}">
+          <a class="nav-link waves-effect " href="/">Home
+
+          </a>
+        </li>
+        <li class="nav-item {% if request.path == '/about' %}active{% endif %}">
+          <a class="nav-link waves-effect" href="/about">About Us</a>
+        </li>
+        <li class="nav-item {% if request.path == '/careers' %}active{% endif %}">
+          <a class="nav-link waves-effect" href="/careers">
+            Careers</a>
+        </li>
+      </ul>
+
+      <!-- Right -->
+      <ul class="navbar-nav nav-flex-icons">
+        <li class="nav-item {% if request.path == '/cart' %}active{% endif %}">
+          <a href="/cart" class="nav-link waves-effect">
+
+            <i class="fas fa-shopping-cart"></i>
+            <span style="font-size: 59%; position:absolute; left:27px" class="badge red z-depth-1 mr-1 cart-count"> 1
+            </span>
+            <span class="clearfix d-none d-sm-inline-block ml-2"> Cart </span>
+          </a>
+        </li>
+        <li class="nav-item newUser">
+          <div onclick="userInfo()" class="nav-link waves-effect">
+
+            <i class="fas fa-user"></i>
+            <span class="clearfix d-none d-sm-inline-block ">Login/Register</span>
+          </div>
+        </li>
+        <li class="nav-item dropdown existingUser">
+          <a href="javascript:void(0)" class="nav-link waves-effect dropdown-toggle " data-toggle="dropdown" data-hover="dropdown"
+            data-delay="0" data-close-others="true"><i class="fas fa-user"></i>  <span class="userName">Username</span></a>
+          <ul class="dropdown-menu w-100">
+            <li onclick="myorders()"><a class="dropdown-item waves-effect waves-light" href="javascript: void(0)">My orders</a>
+            </li>
+            <li onclick="logout()"><a class="dropdown-item waves-effect waves-light" href="javascript: void(0)">Logout</a>
+            </li>
+          </ul>
+        </li>
+        
+
+        <li class="nav-item">
+          <a href="https://www.facebook.com/amtzltd/" class="nav-link waves-effect" target="_blank">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="https://www.facebook.com/amtzltd/" class="nav-link waves-effect" target="_blank">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+</nav>
+
+
+<div class="modal" id="userInfo">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title user">Login/Register</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <!-- Nav pills -->
+        <ul class="nav nav-tabs row">
+          <li class="nav-item col-6 login-tab">
+            <a class="nav-link active " data-toggle="tab" href="#login">Login</a>
+          </li>
+          <li class="nav-item col-6">
+            <a class="nav-link" data-toggle="tab" href="#register">Register</a>
+          </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane container active" id="login">
+            <form id="login-form" class="card-body">
+              <div class="md-form mb-5">
+                <input type="text" id="login-email" class="form-control" required>
+                <label for="login-email" class="">Email</label>
+              </div>
+              <div class="md-form mb-5">
+                <input type="password" id="login-passsword" class="form-control" required>
+                <label for="login-passsword" class="">Password</label>
+              </div>
+              <button class="btn btn-primary btn-lg btn-block" onclick="invokeLogin()">Login</button>
+            </form>
+          </div>
+          <div class="tab-pane container fade" id="register">
+            <form id="register-form" class="card-body">
+              <div class="row">
+                <!--Grid column-->
+                <div class="col-md-6 mb-2">
+
+
+                  <div class="md-form ">
+                    <input type="text" id="reg-firstName" class="form-control" required>
+                    <label for="reg-firstName" class="">First name</label>
+                  </div>
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-6 mb-2">
+
+
+                  <div class="md-form">
+                    <input type="text" id="reg-lastName" class="form-control" required>
+                    <label for="reg-lastName" class="">Last name</label>
+                  </div>
+
+                </div>
+                <!--Grid column-->
+                <div class="col-md-6 mb-2">
+
+
+                  <div class="md-form ">
+                    <input type="email" id="reg-email" class="form-control" required>
+                    <label for="reg-email" class="">Email</label>
+                  </div>
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-6 mb-2">
+
+
+                  <div class="md-form">
+                    <input type="text" pattern="\d*" maxlength="10" id="reg-phone" class="form-control" required>
+                    <label for="reg-phone" class="">Phone</label>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-2">
+
+
+                  <div class="md-form">
+                    <input type="password" id="reg-password" class="form-control" required>
+                    <label for="reg-password" class="">Password</label>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-2">
+
+
+                  <div class="md-form">
+                    <input type="password" id="reg-confirmpassword" class="form-control" required>
+                    <label for="reg-confirmpassword" class="">Confirm Password</label>
+                  </div>
+
+                </div>
+              </div>
+              <button class="btn btn-primary btn-lg btn-block" onclick="invokeRegister()">Register</button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- Navbar -->

@@ -1,0 +1,22 @@
+{% load static %}
+
+
+{% include 'base.html' %}
+{% include 'navbar.html' %}
+
+{% block title %}About Us{% endblock %}
+
+{% block base_css %}
+<script  src="{% static 'js/home.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+.<div style="height: 80vh;" class="jumbotron">
+    <h1 class="display-4">About Us</h1>
+    <p class="lead">This is About US page</p>
+    <hr class="my-4">
+    <p>Content</p>
+</div>
+{% endblock %}
+
+{% include 'footer.html' %}

@@ -1,0 +1,126 @@
+{% load static %}
+{% load humanize %}
+
+{% include 'base.html' %}
+{% include 'navbar.html' %}
+
+
+
+{% block base_css %}
+<script src="{% static 'js/product.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+
+<!--Main layout-->
+<main class="mt-5 pt-4">
+    <div class="container dark-grey-text mt-5">
+
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+
+            <!--Grid column-->
+            <div class="col-md-6 mb-4 text-center">
+
+                <img style="max-height: 240px; min-height: 240px;" src="/media/{{product.photos.0}}" class="img-fluid"
+                    alt="">
+
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-md-6 mb-4">
+
+                <!--Content-->
+                <div class="p-4">
+
+                    <div class="mb-3">
+                        <div>
+                            <span class="badge purple mr-1 mb-3">{{product.category}}</span>
+                        </div>
+                    </div>
+                    <p class="lead font-weight-bold">{{product.name}}</p>
+                    <p class="lead">
+
+                        <span>₹ {{product.price |intcomma}}/-</span>
+                    </p>
+
+                    <!-- <p class="lead font-weight-bold">Description</p>
+
+            <p>{{product.description}}</p> -->
+                    <div href="">
+                        <span class="badge red mr-1">{{product.stock|intcomma}} left</span>
+                    </div>
+                    <form class="d-flex justify-content-left mt-2">
+                        <!-- Default input -->
+                        <!-- <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px"> -->
+
+                        <div onclick="toggleProductToCart()" class="btn btn-primary cartBtn btn-md my-0 p" style="margin:0px" >Add to cart
+                            <i class="fas fa-shopping-cart ml-1"></i>
+                        </div>
+
+                    </form>
+
+                </div>
+                <!--Content-->
+
+            </div>
+            <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+
+        <hr>
+
+        <!--Grid row-->
+        <div class="row d-flex justify-content-center wow fadeIn">
+
+            <!--Grid column-->
+            <div class="col-md-6 text-center">
+
+                <h4 class="my-4 h4">Additional information</h4>
+
+                <p>{{product.description}}</p>
+
+            </div>
+            <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+            {% for photo in product.photos%}
+            <!--Grid column-->
+            <div class="col-lg-4 col-md-12 mb-4">
+
+                <img style="max-height: 300px;" src="/media/{{photo}}" class="img-fluid" alt="">
+
+            </div>
+            <!--Grid column-->
+            {% endfor %}
+
+
+
+
+        </div>
+        <!--Grid row-->
+
+    </div>
+</main>
+<!--Main layout-->
+<script type="text/javascript">
+    var product = {
+        'name': '{{product.name}}',
+        'price': '{{product.price}}',
+        'id': '{{product.id}}',
+        'stock': '{{product.stock}}',
+        'image': '{{product.photos.0}}',
+        'category':'{{product.category}}',
+    }
+</script>
+
+{% endblock %}
+
+{% include 'footer.html' %}
